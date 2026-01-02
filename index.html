@@ -19,45 +19,30 @@
                 <span id="last-update">Last update: -</span>
             </div>
 
-            <div class="account-info">
-                <div class="info-row">
-                    <span class="label">Account</span>
-                    <span id="account-login" class="value">-</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Server</span>
-                    <span id="account-server" class="value">-</span>
-                </div>
+            <!-- Display Mode Selector -->
+            <div class="view-selector">
+                <button class="view-btn active" data-view="tabs">Tabs</button>
+                <button class="view-btn" data-view="grid">Grid</button>
+                <button class="view-btn" data-view="dropdown">Dropdown</button>
             </div>
 
-            <div class="cards-grid">
-                <div class="card balance">
-                    <div class="card-label">Balance</div>
-                    <div class="card-value" id="balance">$0.00</div>
-                </div>
-                <div class="card equity">
-                    <div class="card-label">Equity</div>
-                    <div class="card-value" id="equity">$0.00</div>
-                </div>
-                <div class="card profit">
-                    <div class="card-label">Profit/Loss</div>
-                    <div class="card-value" id="profit">$0.00</div>
-                </div>
-                <div class="card margin">
-                    <div class="card-label">Free Margin</div>
-                    <div class="card-value" id="free-margin">$0.00</div>
-                </div>
+            <!-- Tabs View -->
+            <div id="tabs-view" class="view-container active">
+                <div class="tabs-header" id="tabs-header"></div>
+                <div class="tabs-content" id="tabs-content"></div>
             </div>
 
-            <div class="margin-info">
-                <div class="info-row">
-                    <span class="label">Margin Used</span>
-                    <span id="margin-used" class="value">$0.00</span>
+            <!-- Grid View -->
+            <div id="grid-view" class="view-container">
+                <div class="accounts-grid" id="accounts-grid"></div>
+            </div>
+
+            <!-- Dropdown View -->
+            <div id="dropdown-view" class="view-container">
+                <div class="dropdown-selector">
+                    <select id="account-selector"></select>
                 </div>
-                <div class="info-row">
-                    <span class="label">Margin Level</span>
-                    <span id="margin-level" class="value">0.00%</span>
-                </div>
+                <div id="dropdown-content"></div>
             </div>
 
             <button id="refresh-btn" class="refresh-btn">Refresh Data</button>
