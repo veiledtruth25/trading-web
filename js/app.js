@@ -65,6 +65,10 @@ function createAccountPanel(account) {
                     <span class="label">Server</span>
                     <span class="value">${account.server}</span>
                 </div>
+                <div class="info-row">
+                    <span class="label">Last Update</span>
+                    <span class="value">${formatDate(account.last_updated)}</span>
+                </div>
             </div>
             <div class="cards-grid">
                 <div class="card balance">
@@ -208,10 +212,11 @@ function switchView(viewName) {
     localStorage.setItem('tradingViewMode', viewName);
 }
 
-// Fetch account data
+// Fetch combined data (single request for all accounts)
 async function fetchAccountData(forceRefresh = false) {
     const now = Date.now();
 
+    // Use cache if available
     if (!forceRefresh && cachedData && (now - lastFetchTime) < CACHE_DURATION) {
         return cachedData;
     }
@@ -220,12 +225,11 @@ async function fetchAccountData(forceRefresh = false) {
     elements.refreshBtn.disabled = true;
 
     try {
-        const url = forceRefresh ?
-            `${CONFIG.DATA_URL}?t=${now}` :
-            CONFIG.DATA_URL;
+        const url = forceRefresh
+            ? `${CONFIG.DATA_URL}?t=${now}`
+            : CONFIG.DATA_URL;
 
         const response = await fetch(url);
-
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
@@ -251,7 +255,7 @@ async function fetchAccountData(forceRefresh = false) {
 
 // Update UI with data
 function updateUI(data) {
-    if (!data || !data.accounts) return;
+    if (!data || !data.accounts || data.accounts.length === 0) return;
 
     const accounts = data.accounts;
 
@@ -260,7 +264,7 @@ function updateUI(data) {
     renderGridView(accounts);
     renderDropdownView(accounts);
 
-    // Update last update time
+    // Show last updated from combined file
     elements.lastUpdate.textContent = `Last update: ${formatDate(data.last_updated)}`;
 }
 
