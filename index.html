@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Account Monitor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Trading Account Monitor</h1>
+            <p class="subtitle">Real-time account data from MetaTrader 5</p>
+        </header>
+
+        <main>
+            <div class="status-bar">
+                <span id="connection-status" class="status offline">Disconnected</span>
+                <span id="last-update">Last update: -</span>
+            </div>
+
+            <div class="account-info">
+                <div class="info-row">
+                    <span class="label">Account</span>
+                    <span id="account-login" class="value">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Server</span>
+                    <span id="account-server" class="value">-</span>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card balance">
+                    <div class="card-label">Balance</div>
+                    <div class="card-value" id="balance">$0.00</div>
+                </div>
+                <div class="card equity">
+                    <div class="card-label">Equity</div>
+                    <div class="card-value" id="equity">$0.00</div>
+                </div>
+                <div class="card profit">
+                    <div class="card-label">Profit/Loss</div>
+                    <div class="card-value" id="profit">$0.00</div>
+                </div>
+                <div class="card margin">
+                    <div class="card-label">Free Margin</div>
+                    <div class="card-value" id="free-margin">$0.00</div>
+                </div>
+            </div>
+
+            <div class="margin-info">
+                <div class="info-row">
+                    <span class="label">Margin Used</span>
+                    <span id="margin-used" class="value">$0.00</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Margin Level</span>
+                    <span id="margin-level" class="value">0.00%</span>
+                </div>
+            </div>
+
+            <button id="refresh-btn" class="refresh-btn">Refresh Data</button>
+        </main>
+
+        <footer>
+            <p>Data auto-refreshes every 5 minutes</p>
+        </footer>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
