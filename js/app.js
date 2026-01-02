@@ -44,6 +44,28 @@ function formatDate(dateString) {
     });
 }
 
+// Get account display name from active_eas
+function getAccountName(account) {
+    if (account.active_eas && account.active_eas.length > 0) {
+        if (account.active_eas.length === 1) {
+            return account.active_eas[0];
+        }
+        return `${account.active_eas.length} EAs`;
+    }
+    return account.name || `Account ${account.login}`;
+}
+
+// Generate EA badges HTML
+function createEaBadges(account) {
+    if (!account.active_eas || account.active_eas.length === 0) {
+        return '';
+    }
+    const badges = account.active_eas.map(ea =>
+        `<span class="ea-badge">${ea}</span>`
+    ).join('');
+    return `<div class="ea-badges">${badges}</div>`;
+}
+
 // Update status
 function setStatus(status) {
     elements.connectionStatus.className = `status ${status}`;
@@ -64,6 +86,10 @@ function createAccountPanel(account) {
                 <div class="info-row">
                     <span class="label">Server</span>
                     <span class="value">${account.server}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Active EAs</span>
+                    <span class="value">${createEaBadges(account) || 'None'}</span>
                 </div>
                 <div class="info-row">
                     <span class="label">Last Update</span>
@@ -108,9 +134,10 @@ function createGridCard(account) {
     return `
         <div class="account-card">
             <div class="account-card-header">
-                <span class="account-card-name">${account.name}</span>
+                <span class="account-card-name">${getAccountName(account)}</span>
                 <span class="account-card-login">#${account.login}</span>
             </div>
+            ${createEaBadges(account)}
             <div class="mini-stats">
                 <div class="mini-stat">
                     <div class="mini-stat-label">Balance</div>
@@ -138,7 +165,7 @@ function renderTabsView(accounts) {
     // Render tabs header
     elements.tabsHeader.innerHTML = accounts.map((acc, index) => `
         <button class="tab-btn ${index === 0 ? 'active' : ''}" data-account-id="${acc.id}">
-            ${acc.name}
+            ${getAccountName(acc)}
         </button>
     `).join('');
 
@@ -175,7 +202,7 @@ function renderGridView(accounts) {
 function renderDropdownView(accounts) {
     // Populate dropdown
     elements.accountSelector.innerHTML = accounts.map(acc => `
-        <option value="${acc.id}">${acc.name} (#${acc.login})</option>
+        <option value="${acc.id}">${getAccountName(acc)} (#${acc.login})</option>
     `).join('');
 
     // Select first account by default

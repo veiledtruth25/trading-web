@@ -354,6 +354,40 @@ footer {
     color: #ff5252;
 }
 
+/* EA Badges */
+.ea-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.ea-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.info-row .ea-badges {
+    margin-bottom: 0;
+}
+
+.info-row .ea-badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+}
+
+.account-card .ea-badges {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 @media (max-width: 600px) {
     .cards-grid {
         grid-template-columns: 1fr;
