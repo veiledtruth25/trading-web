@@ -44,14 +44,8 @@ function formatDate(dateString) {
     });
 }
 
-// Get account display name from active_eas
+// Get account owner name
 function getAccountName(account) {
-    if (account.active_eas && account.active_eas.length > 0) {
-        if (account.active_eas.length === 1) {
-            return account.active_eas[0];
-        }
-        return `${account.active_eas.length} EAs`;
-    }
     return account.name || `Account ${account.login}`;
 }
 
@@ -82,6 +76,10 @@ function createAccountPanel(account) {
                 <div class="info-row">
                     <span class="label">Account</span>
                     <span class="value">${account.login}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Name</span>
+                    <span class="value">${getAccountName(account)}</span>
                 </div>
                 <div class="info-row">
                     <span class="label">Server</span>
