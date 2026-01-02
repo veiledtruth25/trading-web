@@ -134,8 +134,8 @@ function createGridCard(account) {
     return `
         <div class="account-card">
             <div class="account-card-header">
-                <span class="account-card-name">${getAccountName(account)}</span>
-                <span class="account-card-login">#${account.login}</span>
+                <span class="account-card-name">${account.login}</span>
+                <span class="account-card-login">${getAccountName(account)}</span>
             </div>
             ${createEaBadges(account)}
             <div class="mini-stats">
@@ -165,7 +165,7 @@ function renderTabsView(accounts) {
     // Render tabs header
     elements.tabsHeader.innerHTML = accounts.map((acc, index) => `
         <button class="tab-btn ${index === 0 ? 'active' : ''}" data-account-id="${acc.id}">
-            ${getAccountName(acc)}
+            ${acc.login}
         </button>
     `).join('');
 
@@ -202,7 +202,7 @@ function renderGridView(accounts) {
 function renderDropdownView(accounts) {
     // Populate dropdown
     elements.accountSelector.innerHTML = accounts.map(acc => `
-        <option value="${acc.id}">${getAccountName(acc)} (#${acc.login})</option>
+        <option value="${acc.id}">${acc.login}</option>
     `).join('');
 
     // Select first account by default
