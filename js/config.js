@@ -7,5 +7,12 @@ const CONFIG = {
     REFRESH_INTERVAL: 300000,
 
     // Currency symbol
-    CURRENCY_SYMBOL: '$'
+    CURRENCY_SYMBOL: '$',
+
+    // Account numbers to exclude from display (add account numbers as strings)
+    EXCLUDE_ACCOUNTS: [
+        '20158621', // Eric Lanvin demo
+        '103183855', // abimanyu demo 
+        '80076323', // Windsor cent 3
+    ]
 };

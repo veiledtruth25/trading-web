@@ -1,7 +1,7 @@
 // State
 let cachedData = null;
 let lastFetchTime = 0;
-let currentView = 'tabs';
+let currentView = 'grid';
 let selectedAccountId = null;
 const CACHE_DURATION = 60000;
 
@@ -47,6 +47,13 @@ function formatDate(dateString) {
 // Get account owner name
 function getAccountName(account) {
     return account.name || `Account ${account.login}`;
+}
+
+// Filter accounts based on exclude list from config
+function filterAccounts(accounts) {
+    const excluded = CONFIG.EXCLUDE_ACCOUNTS || [];
+    if (excluded.length === 0) return accounts;
+    return accounts.filter(acc => !excluded.includes(String(acc.login)));
 }
 
 // Generate EA badges HTML
@@ -198,9 +205,9 @@ function renderGridView(accounts) {
 
 // Render Dropdown View
 function renderDropdownView(accounts) {
-    // Populate dropdown
+    // Populate dropdown with account number and name
     elements.accountSelector.innerHTML = accounts.map(acc => `
-        <option value="${acc.id}">${acc.login}</option>
+        <option value="${acc.id}">${acc.login} - ${getAccountName(acc)}</option>
     `).join('');
 
     // Select first account by default
@@ -282,7 +289,18 @@ async function fetchAccountData(forceRefresh = false) {
 function updateUI(data) {
     if (!data || !data.accounts || data.accounts.length === 0) return;
 
-    const accounts = data.accounts;
+    // Filter accounts based on exclude list
+    const accounts = filterAccounts(data.accounts);
+
+    if (accounts.length === 0) {
+        elements.tabsHeader.innerHTML = '<p class="no-accounts">No accounts to display</p>';
+        elements.tabsContent.innerHTML = '';
+        elements.accountsGrid.innerHTML = '<p class="no-accounts">No accounts to display</p>';
+        elements.accountSelector.innerHTML = '<option value="">No accounts available</option>';
+        elements.dropdownContent.innerHTML = '';
+        elements.lastUpdate.textContent = `Last update: ${formatDate(data.last_updated)}`;
+        return;
+    }
 
     // Render all views
     renderTabsView(accounts);
@@ -301,10 +319,12 @@ function initViewSwitcher() {
         });
     });
 
-    // Restore saved preference
+    // Restore saved preference, default to 'grid' if none saved
     const savedView = localStorage.getItem('tradingViewMode');
     if (savedView && ['tabs', 'grid', 'dropdown'].includes(savedView)) {
         switchView(savedView);
+    } else {
+        switchView('grid');
     }
 }
 

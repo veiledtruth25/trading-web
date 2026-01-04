@@ -69,6 +69,14 @@ header h1 {
     color: #888;
 }
 
+/* No accounts message */
+.no-accounts {
+    text-align: center;
+    color: #888;
+    padding: 40px 20px;
+    font-size: 0.95rem;
+}
+
 /* View Selector */
 .view-selector {
     display: flex;
