@@ -337,6 +337,27 @@ footer {
     font-size: 0.8rem;
 }
 
+.footer-note {
+    margin-bottom: 8px;
+    color: #888;
+}
+
+.disclaimer {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    text-align: left;
+}
+
+.disclaimer p {
+    color: #777;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
 /* Grid card mini stats */
 .mini-stats {
     display: grid;
