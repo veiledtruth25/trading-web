@@ -23,6 +23,7 @@
             <div class="view-selector">
                 <button class="view-btn" data-view="tabs">Tabs</button>
                 <button class="view-btn active" data-view="grid">Grid</button>
+                <button class="view-btn" data-view="table">Table</button>
                 <button class="view-btn" data-view="dropdown">Dropdown</button>
             </div>
 
@@ -35,6 +36,26 @@
             <!-- Grid View -->
             <div id="grid-view" class="view-container active">
                 <div class="accounts-grid" id="accounts-grid"></div>
+            </div>
+
+            <!-- Table View -->
+            <div id="table-view" class="view-container">
+                <div class="table-wrapper">
+                    <table class="accounts-table" id="accounts-table">
+                        <thead>
+                            <tr>
+                                <th>Account</th>
+                                <th>Name</th>
+                                <th>Balance</th>
+                                <th>Equity</th>
+                                <th>Profit/Loss</th>
+                                <th>Free Margin</th>
+                                <th>Margin Level</th>
+                            </tr>
+                        </thead>
+                        <tbody id="accounts-table-body"></tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Dropdown View -->

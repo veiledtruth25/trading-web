@@ -161,6 +161,61 @@ header h1 {
     }
 }
 
+/* Table View */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.accounts-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.accounts-table th,
+.accounts-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accounts-table th {
+    background: rgba(255, 255, 255, 0.08);
+    color: #888;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.accounts-table tbody tr {
+    transition: background 0.2s;
+}
+
+.accounts-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.accounts-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.accounts-table td {
+    color: #fff;
+    white-space: nowrap;
+}
+
+.accounts-table td.positive {
+    color: #00c853;
+}
+
+.accounts-table td.negative {
+    color: #ff5252;
+}
+
 .account-card {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;

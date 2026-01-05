@@ -14,12 +14,15 @@ const elements = {
     viewBtns: document.querySelectorAll('.view-btn'),
     tabsView: document.getElementById('tabs-view'),
     gridView: document.getElementById('grid-view'),
+    tableView: document.getElementById('table-view'),
     dropdownView: document.getElementById('dropdown-view'),
     // Tabs
     tabsHeader: document.getElementById('tabs-header'),
     tabsContent: document.getElementById('tabs-content'),
     // Grid
     accountsGrid: document.getElementById('accounts-grid'),
+    // Table
+    accountsTableBody: document.getElementById('accounts-table-body'),
     // Dropdown
     accountSelector: document.getElementById('account-selector'),
     dropdownContent: document.getElementById('dropdown-content')
@@ -203,6 +206,24 @@ function renderGridView(accounts) {
     elements.accountsGrid.innerHTML = accounts.map(acc => createGridCard(acc)).join('');
 }
 
+// Render Table View
+function renderTableView(accounts) {
+    elements.accountsTableBody.innerHTML = accounts.map(acc => {
+        const profitClass = acc.profit >= 0 ? 'positive' : 'negative';
+        return `
+            <tr>
+                <td>${acc.login}</td>
+                <td>${getAccountName(acc)}</td>
+                <td>${formatCurrency(acc.balance)}</td>
+                <td>${formatCurrency(acc.equity)}</td>
+                <td class="${profitClass}">${formatCurrency(acc.profit)}</td>
+                <td>${formatCurrency(acc.free_margin)}</td>
+                <td>${acc.margin_level.toFixed(2)}%</td>
+            </tr>
+        `;
+    }).join('');
+}
+
 // Render Dropdown View
 function renderDropdownView(accounts) {
     // Populate dropdown with account number and name
@@ -238,6 +259,7 @@ function switchView(viewName) {
     // Show/hide view containers
     elements.tabsView.classList.toggle('active', viewName === 'tabs');
     elements.gridView.classList.toggle('active', viewName === 'grid');
+    elements.tableView.classList.toggle('active', viewName === 'table');
     elements.dropdownView.classList.toggle('active', viewName === 'dropdown');
 
     // Save preference
@@ -296,6 +318,7 @@ function updateUI(data) {
         elements.tabsHeader.innerHTML = '<p class="no-accounts">No accounts to display</p>';
         elements.tabsContent.innerHTML = '';
         elements.accountsGrid.innerHTML = '<p class="no-accounts">No accounts to display</p>';
+        elements.accountsTableBody.innerHTML = '<tr><td colspan="7" class="no-accounts">No accounts to display</td></tr>';
         elements.accountSelector.innerHTML = '<option value="">No accounts available</option>';
         elements.dropdownContent.innerHTML = '';
         elements.lastUpdate.textContent = `Last update: ${formatDate(data.last_updated)}`;
@@ -305,6 +328,7 @@ function updateUI(data) {
     // Render all views
     renderTabsView(accounts);
     renderGridView(accounts);
+    renderTableView(accounts);
     renderDropdownView(accounts);
 
     // Show last updated from combined file
@@ -321,7 +345,7 @@ function initViewSwitcher() {
 
     // Restore saved preference, default to 'grid' if none saved
     const savedView = localStorage.getItem('tradingViewMode');
-    if (savedView && ['tabs', 'grid', 'dropdown'].includes(savedView)) {
+    if (savedView && ['tabs', 'grid', 'table', 'dropdown'].includes(savedView)) {
         switchView(savedView);
     } else {
         switchView('grid');
