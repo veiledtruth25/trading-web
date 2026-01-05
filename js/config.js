@@ -14,5 +14,8 @@ const CONFIG = {
         '20158621', // Eric Lanvin demo
         '103183855', // abimanyu demo 
         '80076323', // Windsor cent 3
+        '80076324', // Windsor cent 4
+        '80068538', // EKA RITAWATI
+        '80075738', // EKA RITAWATI
     ]
 };
