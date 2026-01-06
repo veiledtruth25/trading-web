@@ -11,6 +11,7 @@ const CONFIG = {
 
     // Account numbers to exclude from display (add account numbers as strings)
     EXCLUDE_ACCOUNTS: [
+        '0', // Account 0
         '20158621', // Eric Lanvin demo
         '103183855', // abimanyu demo 
         '80076323', // Windsor cent 3
