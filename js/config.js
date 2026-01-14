@@ -18,5 +18,6 @@ const CONFIG = {
         '80076324', // Windsor cent 4
         '80068538', // EKA RITAWATI
         '80075738', // EKA RITAWATI
+        '80146857', // Bayu Kresna Ramadhani => Sudah WD All
     ]
 };
