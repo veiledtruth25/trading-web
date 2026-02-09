@@ -1,6 +1,6 @@
 {
   "server": {
-    "ip": "127.0.0.1",
+    "ip": "ct-server.winbro.id",
     "port": 5550
   }
 }
